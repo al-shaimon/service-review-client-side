@@ -1,23 +1,23 @@
-import React, { useContext } from "react";
-import { useState } from "react";
-import { toast } from "react-hot-toast";
-import { AuthContext } from "./Context/AuthProvider/AuthProvider";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import React, { useContext } from 'react';
+import { useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { AuthContext } from './Context/AuthProvider/AuthProvider';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Registration = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const from = location.state?.from?.pathname || "/";
+  const from = location.state?.from?.pathname || '/';
 
   const [userInfo, setUserInfo] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
 
   const [errors, setErrors] = useState({
-    email: "",
-    password: "",
-    general: "",
+    email: '',
+    password: '',
+    general: '',
   });
 
   const [accepted, setAccepted] = useState(false);
@@ -37,10 +37,10 @@ const Registration = () => {
         const currentUser = {
           email: userInfo.email,
         };
-        fetch("https://b6a11-service-review-server-side-k-porus.vercel.app/jwt", {
-          method: "POST",
+        fetch('https://b6a11-service-review-server-side-k-porus.vercel.app/jwt', {
+          method: 'POST',
           headers: {
-            "content-type": "application/json",
+            'content-type': 'application/json',
           },
           body: JSON.stringify(currentUser),
         })
@@ -48,7 +48,7 @@ const Registration = () => {
           .then((data) => {
             console.log(data);
             // local storage is the easiest but not the best place to store jwt token
-            localStorage.setItem("photo-token", data.token);
+            localStorage.setItem('photo-token', data.token);
             navigate(from, { replace: true });
           });
         e.target.reset();
@@ -63,10 +63,10 @@ const Registration = () => {
     const email = e.target.value;
 
     if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-      setErrors({ ...errors, email: "Please provide a valid email" });
-      setUserInfo({ ...userInfo, email: "" });
+      setErrors({ ...errors, email: 'Please provide a valid email' });
+      setUserInfo({ ...userInfo, email: '' });
     } else {
-      setErrors({ ...errors, email: "" });
+      setErrors({ ...errors, email: '' });
       setUserInfo({ ...userInfo, email: e.target.value });
     }
   };
@@ -78,16 +78,16 @@ const Registration = () => {
     const noCapitalLetterError = !/[A-Z]{1,}/.test(password);
 
     if (lengthError) {
-      setErrors({ ...errors, password: "Must be at least 6 characters" });
-      setUserInfo({ ...userInfo, password: "" });
+      setErrors({ ...errors, password: 'Must be at least 6 characters' });
+      setUserInfo({ ...userInfo, password: '' });
     } else if (noSymbolError) {
-      setErrors({ ...errors, password: "Must have a unique number" });
-      setUserInfo({ ...userInfo, password: " " });
+      setErrors({ ...errors, password: 'Must have a unique number' });
+      setUserInfo({ ...userInfo, password: ' ' });
     } else if (noCapitalLetterError) {
-      setErrors({ ...errors, password: "Must have a capital letter" });
-      setUserInfo({ ...userInfo, password: " " });
+      setErrors({ ...errors, password: 'Must have a capital letter' });
+      setUserInfo({ ...userInfo, password: ' ' });
     } else {
-      setErrors({ ...errors, password: "" });
+      setErrors({ ...errors, password: '' });
       setUserInfo({ ...userInfo, password: e.target.value });
     }
   };
@@ -97,77 +97,71 @@ const Registration = () => {
   };
 
   return (
-    <div className='hero min-h-screen bg-base-200' onSubmit={handleLogin}>
-      <div className='hero-content flex-col lg:flex-row-reverse'>
-        <div className='text-center lg:textcenter'>
+    <div className="hero min-h-screen bg-base-200" onSubmit={handleLogin}>
+      <div className="hero-content flex-col lg:flex-row-reverse">
+        <div className="text-center lg:textcenter">
           <img
-            className='md:w-2/3 inline md:inline-block '
-            src='https://img.icons8.com/external-smashingstocks-hand-drawn-black-smashing-stocks/99/null/external-digital-camera-graphic-design-and-photography-smashingstocks-hand-drawn-black-smashing-stocks.png'
-            alt='logo'
+            className="md:w-2/3 inline md:inline-block "
+            src="https://upload.wikimedia.org/wikipedia/en/4/44/Aperture_Icon.png"
+            alt="logo"
           />
-          <h1 className='text-5xl font-bold'>Register Now !</h1>
-          <p className='py-6'>
-            Welcome to User. Please register for using our services.
-          </p>
+          <h1 className="text-5xl font-bold">Register Now !</h1>
+          <p className="py-6">Welcome to User. Please register for using our services.</p>
         </div>
-        <form className='card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100'>
-          <div className='card-body'>
-            <div className='form-control'>
-              <label className='label'>
-                <span className='label-text'>Name</span>
+        <form className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+          <div className="card-body">
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Name</span>
               </label>
               <input
-                type='text'
-                name='name'
-                placeholder='Enter your name'
-                className='input input-bordered'
+                type="text"
+                name="name"
+                placeholder="Enter your name"
+                className="input input-bordered"
                 required
               />
-              <label className='label'>
-                <span className='label-text'>Email</span>
+              <label className="label">
+                <span className="label-text">Email</span>
               </label>
               <input
-                type='email'
-                name='email'
-                placeholder='email'
-                className='input input-bordered'
+                type="email"
+                name="email"
+                placeholder="email"
+                className="input input-bordered"
                 required
                 onChange={handleEmailChange}
               />
-              {errors.email && <p className='text-red-600'>{errors.email}</p>}
+              {errors.email && <p className="text-red-600">{errors.email}</p>}
             </div>
-            <div className='form-control'>
-              <label className='label'>
-                <span className='label-text'>Password</span>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Password</span>
               </label>
               <input
-                type='password'
-                name='password'
-                placeholder='password'
-                className='input input-bordered'
+                type="password"
+                name="password"
+                placeholder="password"
+                className="input input-bordered"
                 required
                 onChange={handlePasswordChange}
               />
-              {errors.password && (
-                <p className='text-red-600'>{errors.password}</p>
-              )}
+              {errors.password && <p className="text-red-600">{errors.password}</p>}
 
               <small>
-                {" "}
-                <Link to='/login'>Already have a account!! Login</Link>
+                {' '}
+                <Link to="/login">Already have a account!! Login</Link>
               </small>
-              <div className='flex text-xl'>
-                <input type='checkbox' onClick={check} required />
-                <label className='label'>
-                  <span className='label-text'>
-                    Accept terms and conditions
-                  </span>
+              <div className="flex text-xl">
+                <input type="checkbox" onClick={check} required />
+                <label className="label">
+                  <span className="label-text">Accept terms and conditions</span>
                 </label>
               </div>
             </div>
-            {errors.general && <p className='text-red-600'>{errors.general}</p>}
-            <div className='form-control mt-6'>
-              <button className='btn btn-primary' disabled={!accepted}>
+            {errors.general && <p className="text-red-600">{errors.general}</p>}
+            <div className="form-control mt-6">
+              <button className="btn btn-primary" disabled={!accepted}>
                 Submit
               </button>
             </div>

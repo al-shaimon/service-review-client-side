@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
+import { FaUser } from 'react-icons/fa';
 import { AuthContext } from './Context/AuthProvider/AuthProvider';
 
 const Header = () => {
@@ -44,7 +45,7 @@ const Header = () => {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/work">My Work</Link>
+              <Link to="/work">Portfolio</Link>
             </li>
             <li>
               <Link to="/services">Services</Link>
@@ -67,8 +68,8 @@ const Header = () => {
         </div>
         <Link to="/">
           <img
-            className="w-2/3"
-            src="https://img.icons8.com/external-smashingstocks-hand-drawn-black-smashing-stocks/99/null/external-digital-camera-graphic-design-and-photography-smashingstocks-hand-drawn-black-smashing-stocks.png"
+            className="w-1/4"
+            src="https://upload.wikimedia.org/wikipedia/en/4/44/Aperture_Icon.png"
             alt="logo"
           />
         </Link>
@@ -79,7 +80,7 @@ const Header = () => {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/work">My Work</Link>
+            <Link to="/work">Portfolio</Link>
           </li>
           <li>
             <Link to="/services">Services</Link>
@@ -105,7 +106,13 @@ const Header = () => {
       <div className="navbar-end">
         <div className="avatar placeholder">
           <div className="bg-neutral-focus text-neutral-content rounded-full w-12">
-            {user?.photoURL ? <img src={user.photoURL} alt="user"></img> : <span>MX</span>}
+            {user?.photoURL ? (
+              <img src={user.photoURL} alt="user"></img>
+            ) : (
+              <span>
+                <FaUser />
+              </span>
+            )}
           </div>
         </div>
       </div>
