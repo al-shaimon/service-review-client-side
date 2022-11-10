@@ -66,12 +66,13 @@ const Header = () => {
             </li>
           </ul>
         </div>
-        <Link to="/">
+        <Link to="/" className="flex justify-center">
           <img
             className="w-1/4"
             src="https://upload.wikimedia.org/wikipedia/en/4/44/Aperture_Icon.png"
             alt="logo"
           />
+          <h1 className="my-7 text-lg ">MOMENT CLICKER</h1>
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
